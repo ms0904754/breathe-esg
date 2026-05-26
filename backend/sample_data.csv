@@ -1,0 +1,4 @@
+category,description,quantity,unit,scope,record_date
+Fuel,Diesel Consumption,500,Liters,Scope 1,2026-01-10
+Electricity,Plant Electricity,1200,kWh,Scope 2,2026-01-15
+Travel,Business Flight,-300,km,Scope 3,2026-01-20
