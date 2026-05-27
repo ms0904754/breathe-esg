@@ -3,52 +3,35 @@ import { useEffect, useState } from "react";
 import api from "../api/api";
 
 export default function Dashboard() {
-
   const [records, setRecords] = useState([]);
 
   const [filter, setFilter] = useState("ALL");
 
   const fetchRecords = async () => {
-
     try {
-
-      const response = await api.get(
-        "/emissions/records/"
-      );
+      const response = await api.get("/emissions/records/");
 
       setRecords(response.data);
-
     } catch (error) {
-
       console.error(error);
     }
   };
 
   const reviewRecord = async (id, action) => {
-
     try {
-
-      await api.patch(
-        `/emissions/review/${id}/`,
-        { action }
-      );
+      await api.patch(`/emissions/review/${id}/`, { action });
 
       fetchRecords();
-
     } catch (error) {
-
       console.error(error);
     }
   };
 
   useEffect(() => {
-
     fetchRecords();
-
   }, []);
 
   const filteredRecords = records.filter((record) => {
-
     if (filter === "APPROVED") {
       return record.status === "APPROVED";
     }
@@ -65,7 +48,6 @@ export default function Dashboard() {
   });
 
   return (
-
     <div
       style={{
         padding: "30px",
@@ -74,7 +56,6 @@ export default function Dashboard() {
         minHeight: "100vh",
       }}
     >
-
       <h1
         style={{
           marginBottom: "20px",
@@ -91,73 +72,42 @@ export default function Dashboard() {
           flexWrap: "wrap",
         }}
       >
-
-        <StatCard
-          title="Total Records"
-          value={records.length}
-        />
+        <StatCard title="Total Records" value={records.length} />
 
         <StatCard
           title="Approved"
-          value={
-            records.filter(
-              (r) => r.status === "APPROVED"
-            ).length
-          }
+          value={records.filter((r) => r.status === "APPROVED").length}
         />
 
         <StatCard
           title="Rejected"
-          value={
-            records.filter(
-              (r) => r.status === "REJECTED"
-            ).length
-          }
+          value={records.filter((r) => r.status === "REJECTED").length}
         />
 
         <StatCard
           title="Suspicious"
-          value={
-            records.filter(
-              (r) => r.is_suspicious
-            ).length
-          }
+          value={records.filter((r) => r.is_suspicious).length}
         />
-
       </div>
 
       <FileUpload onUploadSuccess={fetchRecords} />
 
       <select
         value={filter}
-
-        onChange={(e) =>
-          setFilter(e.target.value)
-        }
-
+        onChange={(e) => setFilter(e.target.value)}
         style={{
           marginBottom: "20px",
           padding: "10px",
           borderRadius: "6px",
         }}
       >
+        <option value="ALL">All Records</option>
 
-        <option value="ALL">
-          All Records
-        </option>
+        <option value="APPROVED">Approved</option>
 
-        <option value="APPROVED">
-          Approved
-        </option>
+        <option value="REJECTED">Rejected</option>
 
-        <option value="REJECTED">
-          Rejected
-        </option>
-
-        <option value="SUSPICIOUS">
-          Suspicious
-        </option>
-
+        <option value="SUSPICIOUS">Suspicious</option>
       </select>
 
       <div
@@ -169,23 +119,19 @@ export default function Dashboard() {
           boxShadow: "0 2px 8px rgba(0,0,0,0.1)",
         }}
       >
-
         <table
           style={{
             width: "100%",
             borderCollapse: "collapse",
           }}
         >
-
           <thead>
-
             <tr
               style={{
                 backgroundColor: "#1f2937",
                 color: "white",
               }}
             >
-
               <th style={thStyle}>Description</th>
               <th style={thStyle}>Category</th>
               <th style={thStyle}>Quantity</th>
@@ -194,48 +140,28 @@ export default function Dashboard() {
               <th style={thStyle}>Status</th>
               <th style={thStyle}>Suspicious</th>
               <th style={thStyle}>Actions</th>
-
             </tr>
-
           </thead>
 
           <tbody>
-
             {filteredRecords.map((record) => (
-
               <tr
                 key={record.id}
-
                 style={{
-                  backgroundColor:
-                    record.is_suspicious
-                      ? "#ffe5e5"
-                      : "white",
+                  backgroundColor: record.is_suspicious ? "#ffe5e5" : "white",
                 }}
               >
+                <td style={tdStyle}>{record.description}</td>
+
+                <td style={tdStyle}>{record.category}</td>
+
+                <td style={tdStyle}>{record.quantity}</td>
+
+                <td style={tdStyle}>{record.unit}</td>
+
+                <td style={tdStyle}>{record.scope}</td>
 
                 <td style={tdStyle}>
-                  {record.description}
-                </td>
-
-                <td style={tdStyle}>
-                  {record.category}
-                </td>
-
-                <td style={tdStyle}>
-                  {record.quantity}
-                </td>
-
-                <td style={tdStyle}>
-                  {record.unit}
-                </td>
-
-                <td style={tdStyle}>
-                  {record.scope}
-                </td>
-
-                <td style={tdStyle}>
-
                   <span
                     style={{
                       padding: "6px 10px",
@@ -246,35 +172,21 @@ export default function Dashboard() {
                         record.status === "APPROVED"
                           ? "#16a34a"
                           : record.status === "REJECTED"
-                          ? "#dc2626"
-                          : "#f59e0b",
+                            ? "#dc2626"
+                            : "#f59e0b",
                     }}
                   >
-
                     {record.status}
-
                   </span>
-
                 </td>
 
                 <td style={tdStyle}>
-
-                  {record.is_suspicious
-                    ? "⚠️ Yes"
-                    : "No"}
-
+                  {record.is_suspicious ? "⚠️ Yes" : "No"}
                 </td>
 
                 <td style={tdStyle}>
-
                   <button
-                    onClick={() =>
-                      reviewRecord(
-                        record.id,
-                        "approve"
-                      )
-                    }
-
+                    onClick={() => reviewRecord(record.id, "approve")}
                     style={{
                       marginRight: "10px",
                       backgroundColor: "#16a34a",
@@ -289,13 +201,7 @@ export default function Dashboard() {
                   </button>
 
                   <button
-                    onClick={() =>
-                      reviewRecord(
-                        record.id,
-                        "reject"
-                      )
-                    }
-
+                    onClick={() => reviewRecord(record.id, "reject")}
                     style={{
                       backgroundColor: "#dc2626",
                       color: "white",
@@ -307,27 +213,18 @@ export default function Dashboard() {
                   >
                     Reject
                   </button>
-
                 </td>
-
               </tr>
-
             ))}
-
           </tbody>
-
         </table>
-
       </div>
-
     </div>
   );
 }
 
 function StatCard({ title, value }) {
-
   return (
-
     <div
       style={{
         backgroundColor: "white",
@@ -337,11 +234,9 @@ function StatCard({ title, value }) {
         boxShadow: "0 2px 8px rgba(0,0,0,0.1)",
       }}
     >
-
       <h3>{title}</h3>
 
       <h1>{value}</h1>
-
     </div>
   );
 }
