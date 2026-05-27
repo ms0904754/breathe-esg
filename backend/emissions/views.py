@@ -44,23 +44,23 @@ class UploadCSVView(APIView):
 
             suspicious = False
 
-            if row["quantity"] < 0:
-                suspicious = True
+        if float(row["quantity"]) < 0:
+            suspicious = True
 
-            record = EmissionRecord.objects.create(
-                organization=organization,
-                source=source,
-                category=row["category"],
-                description=row["description"],
-                quantity=row["quantity"],
-                unit=row["unit"],
-                normalized_unit=row["unit"].lower(),
-                scope=row["scope"],
-                record_date=row["record_date"],
-                is_suspicious=suspicious
-            )
+        record = EmissionRecord.objects.create(
+            organization=organization,
+            source=source,
+            category=str(row.get("category", "")),
+            description=str(row.get("description", "")),
+            quantity=float(row.get("quantity", 0)),
+            unit=str(row.get("unit", "")),
+            normalized_unit=str(row.get("unit", "")).lower(),
+            scope=str(row.get("scope", "")),
+            record_date=row.get("record_date"),
+            is_suspicious=suspicious
+        )
 
-            records_created.append(record)
+        records_created.append(record)
 
         serializer = EmissionRecordSerializer(
             records_created,
