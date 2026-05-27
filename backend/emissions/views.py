@@ -28,7 +28,10 @@ class UploadCSVView(APIView):
         df = pd.read_csv(file)
 
         organization = Organization.objects.first()
-
+        if not organization:
+             organization = Organization.objects.create(
+             name="Default Organization"
+             )
         source = Source.objects.create(
             organization=organization,
             source_type="SAP",
