@@ -22,15 +22,7 @@ export default function FileUpload({ onUploadSuccess }) {
 
       setLoading(true);
 
-      await api.post(
-        "/emissions/upload/",
-        formData,
-        {
-          headers: {
-            "Content-Type": "multipart/form-data",
-          },
-        }
-      );
+     await api.post("/emissions/upload/", formData); // ✅ no headers at all
 
       alert("File uploaded successfully");
 
