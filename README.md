@@ -6,7 +6,7 @@ A full-stack ESG (Environmental, Social, Governance) management platform built u
 
 ### Frontend
 
-[https://breatheesg-dfnh.vercel.app/](https://breatheesg-dfnh.vercel.app/)
+[https://breathe-o48vr06hc-ms0904754s-projects.vercel.app/](https://breathe-o48vr06hc-ms0904754s-projects.vercel.app/)
 
 ### Backend API
 
@@ -14,7 +14,7 @@ A full-stack ESG (Environmental, Social, Governance) management platform built u
 
 ### GitHub Repository
 
-[https://github.com/ms0904754/breathe-esg](https://github.com/ms0904754/breathe-esg)
+[https://breathe-esg-production-6dd5.up.railway.app/admin/](https://breathe-esg-production-6dd5.up.railway.app/admin/)
 
 ---
 
