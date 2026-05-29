@@ -1,8 +1,8 @@
 import axios from "axios";
 
+// Ensure the baseURL matches your running backend exactly
 const api = axios.create({
-  baseURL: import.meta.env.VITE_API_URL || "http://127.0.0.1:8080/api",
-  withCredentials: true,
+  baseURL: 'http://127.0.0.1:8080/api', // Use 127.0.0.1 if localhost fails
 });
 
 // For FormData (file uploads), don't set Content-Type header
@@ -17,11 +17,9 @@ api.interceptors.request.use((config) => {
 api.interceptors.response.use(
   (response) => response,
   (error) => {
-    console.error("API Error:", {
-      status: error.response?.status,
-      data: error.response?.data,
-      message: error.message,
-    });
+    // Log the message directly so it's visible without expanding the object
+    console.error(`API Error (${error.response?.status || 'Network Error'}):`, error.message);
+    console.dir(error.response?.data); // Show server-side validation/error details
     return Promise.reject(error);
   }
 );
