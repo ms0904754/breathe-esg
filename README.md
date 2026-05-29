@@ -6,7 +6,7 @@ A full-stack ESG (Environmental, Social, Governance) management platform built u
 
 ### Frontend
 
-[https://breathe-o48vr06hc-ms0904754s-projects.vercel.app/](https://breathe-o48vr06hc-ms0904754s-projects.vercel.app/)
+[https://breathe-lndwcmlf2-ms0904754s-projects.vercel.app](https://breathe-lndwcmlf2-ms0904754s-projects.vercel.app)
 
 ### Backend API
 
