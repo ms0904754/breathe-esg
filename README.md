@@ -12,9 +12,13 @@ A full-stack ESG (Environmental, Social, Governance) management platform built u
 
 [https://breathe-esg-production-6dd5.up.railway.app/api/emissions/records/](https://breathe-esg-production-6dd5.up.railway.app/api/emissions/records/)
 
-### GitHub Repository
+### django admin panel
 
 [https://breathe-esg-production-6dd5.up.railway.app/admin/](https://breathe-esg-production-6dd5.up.railway.app/admin/)
+
+Username: admin
+
+Password: admin@123
 
 ---
 
