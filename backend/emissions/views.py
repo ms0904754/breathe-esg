@@ -108,3 +108,48 @@ class UploadCSVView(APIView):
 
         serializer = EmissionRecordSerializer(records_created, many=True)
         return Response(serializer.data, status=status.HTTP_201_CREATED)
+    
+class ReviewEmissionView(APIView):
+
+    def patch(self, request, pk):
+
+        try:
+            record = EmissionRecord.objects.get(id=pk)
+
+        except EmissionRecord.DoesNotExist:
+            return Response(
+                {"error": "Record not found"},
+                status=status.HTTP_404_NOT_FOUND
+            )
+
+        action = request.data.get("action")
+
+        if action == "approve":
+            record.status = "APPROVED"
+            audit_action = "APPROVED"
+
+        elif action == "reject":
+            record.status = "REJECTED"
+            audit_action = "REJECTED"
+
+        else:
+            return Response({"error": "Invalid action"})
+
+        record.save()
+
+        AuditLog.objects.create(
+            emission_record=record,
+            action=audit_action,
+            performed_by="admin",
+            notes=f"Record {action}d by analyst"
+        )
+
+        return Response({
+            "message": f"Record {action}d successfully"
+        })
+
+
+class EmissionRecordListView(ListAPIView):
+
+    queryset = EmissionRecord.objects.all().order_by("-id")
+    serializer_class = EmissionRecordSerializer
