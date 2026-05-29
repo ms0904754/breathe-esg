@@ -2,19 +2,31 @@
 
 A full-stack ESG (Environmental, Social, Governance) management platform built using Django REST Framework and React.
 
-## 🚀 Live Demo
+---
 
-### Frontend
+# 🚀 Live Deployment
 
-[https://breathe-lndwcmlf2-ms0904754s-projects.vercel.app](https://breathe-lndwcmlf2-ms0904754s-projects.vercel.app)
+## Frontend
 
-### Backend API
+https://breathe-lndwcmlf2-ms0904754s-projects.vercel.app
 
-[https://breathe-esg-production-6dd5.up.railway.app/api/emissions/records/](https://breathe-esg-production-6dd5.up.railway.app/api/emissions/records/)
+## Backend API
 
-### django admin panel
+https://breathe-esg-production-6dd5.up.railway.app/api/emissions/records/
 
-[https://breathe-esg-production-6dd5.up.railway.app/admin/](https://breathe-esg-production-6dd5.up.railway.app/admin/)
+
+## GitHub Repository
+
+https://github.com/ms0904754/breathe-esg
+
+---
+
+# 🔐 Evaluation Credentials
+
+### Django Admin Login
+
+URL:
+https://breathe-esg-production-6dd5.up.railway.app/admin/
 
 Username: admin
 
@@ -26,12 +38,13 @@ Password: admin@123
 
 * Upload ESG emission data using CSV
 * View all emission records
-* Detect suspicious emission values
+* Detect suspicious emission values automatically
+* Approve and reject emission records
 * Audit logging system
 * REST API using Django REST Framework
 * PostgreSQL database integration
-* React frontend dashboard
-* Fully deployed frontend & backend
+* React dashboard interface
+* Fully deployed frontend and backend
 
 ---
 
@@ -42,11 +55,13 @@ Password: admin@123
 * Django
 * Django REST Framework
 * PostgreSQL
+* Pandas
 * Railway Deployment
 
 ## Frontend
 
 * React
+* Vite
 * Axios
 * Vercel Deployment
 
@@ -58,16 +73,18 @@ Password: admin@123
 breathe-esg/
 │
 ├── backend/
-│   ├── emissions/
 │   ├── audits/
+│   ├── emissions/
 │   ├── organizations/
 │   ├── reviews/
 │   ├── sources/
 │   └── config/
 │
 ├── frontend/
+│   ├── public/
 │   ├── src/
-│   └── public/
+│   ├── package.json
+│   └── vite.config.js
 │
 └── README.md
 ```
@@ -76,20 +93,20 @@ breathe-esg/
 
 # ⚙️ Backend Setup
 
-## 1. Clone Repository
+## Clone Repository
 
 ```bash
 git clone https://github.com/ms0904754/breathe-esg.git
 cd breathe-esg/backend
 ```
 
-## 2. Create Virtual Environment
+## Create Virtual Environment
 
 ```bash
 python -m venv venv
 ```
 
-## 3. Activate Environment
+## Activate Environment
 
 ### Windows
 
@@ -103,19 +120,25 @@ venv\Scripts\activate
 source venv/bin/activate
 ```
 
-## 4. Install Dependencies
+## Install Dependencies
 
 ```bash
 pip install -r requirements.txt
 ```
 
-## 5. Run Migrations
+## Run Migrations
 
 ```bash
 python manage.py migrate
 ```
 
-## 6. Start Backend Server
+## Create Superuser
+
+```bash
+python manage.py createsuperuser
+```
+
+## Start Backend Server
 
 ```bash
 python manage.py runserver
@@ -131,19 +154,19 @@ http://127.0.0.1:8000
 
 # 💻 Frontend Setup
 
-## 1. Move to Frontend
+## Move to Frontend
 
 ```bash
 cd frontend
 ```
 
-## 2. Install Dependencies
+## Install Dependencies
 
 ```bash
 npm install
 ```
 
-## 3. Start Frontend
+## Start Frontend
 
 ```bash
 npm run dev
@@ -157,41 +180,57 @@ http://localhost:5173
 
 ---
 
-# 📡 API Endpoint
+# 📡 API Endpoints
 
-## Get Emission Records
+## Get All Records
 
 ```http
 GET /api/emissions/records/
 ```
 
-Example Response:
+## Upload CSV
 
-```json
-[
-  {
-    "id": 1,
-    "description": "Plant Electricity",
-    "category": "Electricity",
-    "quantity": 1200,
-    "unit": "kWh",
-    "scope": "Scope 2",
-    "status": "APPROVED",
-    "is_suspicious": false
-  }
-]
+```http
+POST /api/emissions/upload/
+```
+
+## Review Record
+
+```http
+PATCH /api/emissions/review/<id>/
+```
+
+---
+
+# 📄 Sample CSV Format
+
+```csv
+description,category,quantity,unit,scope,record_date
+Plant Electricity Usage,Electricity,1200,kWh,Scope 2,2025-01-15
+Factory Diesel Consumption,Fuel,850,Liters,Scope 1,2025-01-16
+Business Air Travel,Travel,4500,km,Scope 3,2025-01-17
+Data Center Power Usage,Electricity,9800,kWh,Scope 2,2025-01-18
+Manufacturing Waste Disposal,Waste,300,kg,Scope 3,2025-01-19
+Company Vehicle Fuel,Fuel,400,Liters,Scope 1,2025-01-20
+Office Electricity Usage,Electricity,650,kWh,Scope 2,2025-01-21
+Employee Train Travel,Travel,1200,km,Scope 3,2025-01-22
+Packaging Material Waste,Waste,150,kg,Scope 3,2025-01-23
+Backup Generator Diesel,Fuel,-50,Liters,Scope 1,2025-01-24
 ```
 
 ---
 
 # ☁️ Deployment
 
-## Backend Deployment
+## Backend
 
 * Railway
+* PostgreSQL (Render)
 
-## Frontend Deployment
+## Frontend
 
 * Vercel
 
 
+GitHub:
+https://github.com/ms0904754
