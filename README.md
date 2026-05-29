@@ -194,15 +194,4 @@ Example Response:
 
 * Vercel
 
----
 
-# 👨‍💻 Author
-
-**Mayank Soni**
-
-* Full Stack Developer
-* Flutter & React Developer
-* Django REST Framework Enthusiast
-
-GitHub:
-[https://github.com/ms0904754](https://github.com/ms0904754)
